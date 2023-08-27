@@ -1,6 +1,5 @@
-// src/App.js
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './components/HomePage';
@@ -14,12 +13,13 @@ function App() {
       <CartProvider>
         <Header />
         <main>
-          <Switch>
-            <Route path="/" exact component={HomePage} />
-            <Route path="/products" exact component={ProductList} />
-            <Route path="/products/:productId" component={ProductDetail} />
+          <Routes>
+        
+            <Route path="/" element={<HomePage />} />
+            <Route path="/products" element={ProductList} />
+            <Route path="/products/:productId" element={ProductDetail} />
             {/* Add more routes as needed */}
-          </Switch>
+          </Routes>
         </main>
         <Footer />
       </CartProvider>
