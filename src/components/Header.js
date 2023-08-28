@@ -2,47 +2,52 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
-import { Navbar, Nav, NavItem, NavLink, Container, Row, Col } from "react-bootstrap";
+import { Navbar, Nav, Container, Row, Col } from "react-bootstrap";
 
 const Header = () => {
   const { cartItems } = useCart();
 
   return (
     <header className="text-white py-3">
-    <Container>
-      <Row>
-        <Col >
-          <img src="/images/wil-logo.png" alt="Wahidiya Bookshop" width="70" />
-        </Col>
-        <Col>
-          <div>
-              <img src="/images/logo-name.png" height={40}/>
-          </div>
-          <Navbar className="text-dark" variant="light">
+      <Container>
+        <Row>
+          <Col >
+            <img src="/images/wil-logo.png" alt="Wahidiya Bookshop" width="70" />
+          </Col>
+          <Col>
+            <div>
+              <img src="/images/logo-name.png" alt="Wahidiya Islamiya Library" height={40}/>
+            </div>
+            <Navbar className="text-dark" variant="light">
+              <Nav>
+                <Nav.Item>
+                  <Link to="/" className="nav-link">লাইব্রেরী</Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Link to="/publications" className="nav-link">প্রকাশনা</Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Link to="/free-ebooks" className="nav-link">ফ্রি ই-বুক</Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Link to="/daawah" className="nav-link">দাওয়াহ</Link>
+                </Nav.Item>
+              </Nav>
+            </Navbar>
+          </Col>
+          <Col>
             <Nav>
-              <NavItem>
-                <NavLink href="/">লাইব্রেরী</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="/publications">প্রকাশনা</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="/free-ebooks">ফ্রি ই-বুক</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="/dawah">দাওয়াহ</NavLink>
-              </NavItem>
+              <Nav.Item>
+                <Link to="/signup" className="nav-link">Sign Up</Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Link to="/signin" className="nav-link">Sign In</Link>
+              </Nav.Item>
             </Nav>
-          </Navbar>
-        </Col>
-        <Col>
-          <NavLink href="/cart">Cart</NavLink>
-        </Col>
-      </Row>
-    </Container>
-   
-
-
+            <Link to="/cart" className="nav-link">Cart ({cartItems.length})</Link>
+          </Col>
+        </Row>
+      </Container>
     </header>
   );
 };
