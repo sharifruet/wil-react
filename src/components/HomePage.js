@@ -3,16 +3,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import ProductList from './ProductList';
 import HomeSlider from './HomeSlider';
+import { Container } from 'react-bootstrap';
 
 const HomePage = () => {
   return (
-    <div className="container">
+    <Container>
       <HomeSlider />
-      <Link to="/products" className="btn btn-primary">
-        Explore Books
-      </Link>
       <ProductList/>
-    </div>
+    </Container>
   );
 };
 

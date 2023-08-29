@@ -18,12 +18,12 @@ export const CartProvider = ({ children }) => {
 
   const addToCart = (product) => {
     // Check if the product already exists in the cart
-    const existingItem = cartItems.find(item => item.id === product.id);
+    const existingItem = cartItems.find(item => item.componentId === product.componentId);
 
     if (existingItem) {
       // If the item exists, update the quantity
       setCartItems(prevItems =>
-        prevItems.map(item => item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item)
+        prevItems.map(item => item.componentId === product.componentId ? { ...item, quantity: item.quantity + 1 } : item)
       );
     } else {
       // If the item doesn't exist, add it to the cart
@@ -32,7 +32,7 @@ export const CartProvider = ({ children }) => {
   };
 
   const removeFromCart = (productId) => {
-    setCartItems(prevItems => prevItems.filter(item => item.id !== productId));
+    setCartItems(prevItems => prevItems.filter(item => item.componentId !== productId));
   };
 
   // Add function to update quantity if needed

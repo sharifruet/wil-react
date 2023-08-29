@@ -2,24 +2,31 @@
 import React from 'react';
 import CartItem from './CartItem';
 import { useCart } from '../context/CartContext';
+import { Button, Col, Container, Row } from 'react-bootstrap';
 
 const Cart = () => {
   const { cartItems, clearCart } = useCart();
 
   return (
-    <div className="cart">
-      <h2>Shopping Cart</h2>
-      {cartItems.length === 0 ? (
-        <p>Your cart is empty.</p>
-      ) : (
-        <div>
-          {cartItems.map(item => (
-            <CartItem key={item.id} item={item} />
-          ))}
-          <button onClick={clearCart}>Clear Cart</button>
-        </div>
+      <Container>
+        <h1 className="m-2 border-bottom border-info">কার্ট</h1>
+        {cartItems.length === 0 ? (
+          <p>Your cart is empty.</p>
+        ) : (
+          <Row>
+            <Col>
+              {cartItems.map(item => (
+                <CartItem key={item.id} item={item} />
+              ))}
+            </Col>
+            <Col>
+              <Button className='m-2' onClick={clearCart}>Clear Cart</Button>
+              <Button className='m-2'>Proceed to Order</Button>
+            </Col>
+          </Row>
       )}
-    </div>
+    
+    </Container>
   );
 };
 
