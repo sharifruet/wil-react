@@ -4,6 +4,9 @@ import { Button, Col, Row } from 'react-bootstrap';
 import {FaMinus, FaPlus} from 'react-icons/fa';
 
 const CartItem = ({ item, removeFromCart }) => {
+  const addQuantity=()=>{
+    item.quantity = item.quantity + 1;
+  }
   return (
     <Row className="cart-item">
       <Col>
