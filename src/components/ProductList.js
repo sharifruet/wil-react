@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import api from '../api';
-import { Container } from 'react-bootstrap';
+import { Button, Container } from 'react-bootstrap';
 import { useCart } from '../context/CartContext';
+import { FaCartPlus } from 'react-icons/fa';
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -27,7 +28,7 @@ const ProductList = () => {
               <div className="card-body">
                 <h6 className="card-title">{product.itemName}</h6>
                 <p className="card-text">৳{product.salePrice}</p>
-                <button className="btn btn-primary" onClick={() => handleAddToCart(product)}>Add to Cart</button>
+                <Button variant='outline-info' onClick={() => handleAddToCart(product)}><FaCartPlus size={24} className="text-primary" /></Button>
               </div>
             </div>
           </div>
