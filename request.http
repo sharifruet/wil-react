@@ -12,12 +12,31 @@ GET http://192.168.40.74
 
 
 
-###
+### Signup - send OTP [Local]
 
-POST http://192.168.40.74
+GET http://localhost:5000/api/auth/otp-signup/01735694199
+content-type: application/json
+
+### Signup - send OTP [WIL]
+GET https://api.wahidiya.com/api/auth/otp-signup/01735694199
+content-type: application/json
+
+### Signup - OTP verify [WIL]
+POST https://api.wahidiya.com/api/auth//otp-verify
 content-type: application/json
 
 {
-    "name": "sample",
-    "time": "Wed, 21 Oct 2015 18:27:50 GMT"
+    "phone":"01735694199",
+    "otp": 92900
+}
+
+### 
+
+### Signup - OTP verify [local]
+POST http://localhost:5000/api/auth//otp-verify
+content-type: application/json
+
+{
+    "phone":"01735694199",
+    "otp": 76659
 }
