@@ -2,7 +2,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
-import { Navbar, Nav, Container, Row, Col } from "react-bootstrap";
+import { Navbar, Nav, Container, Row, Col, Badge } from "react-bootstrap";
+import { BsCartFill } from "react-icons/bs";
 
 const Header = () => {
   const { cartItems } = useCart();
@@ -44,7 +45,10 @@ const Header = () => {
                 <Link to="/signin" className="nav-link">Sign In</Link>
               </Nav.Item>
             </Nav>
-            <Link to="/cart" className="nav-link">Cart ({cartItems.length})</Link>
+            <Link to="/cart" className=""> 
+              <BsCartFill/> 
+              <Badge pill bg="danger">{cartItems.length}</Badge>
+              <span className="visually-hidden">Items in Cart</span> </Link>
           </Col>
         </Row>
       </Container>

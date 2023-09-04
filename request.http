@@ -40,3 +40,13 @@ content-type: application/json
     "phone":"01735694199",
     "otp": 76659
 }
+
+### Signup - additional[local]
+POST http://localhost:5000/api/auth/signup/7445
+content-type: application/json
+
+{
+    "name":"Sharif 1",
+    "address":"Dhaka",
+    "password":"1234"
+}

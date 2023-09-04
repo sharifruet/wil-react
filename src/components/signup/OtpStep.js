@@ -4,11 +4,15 @@ import api from '../../api';
 
 const OtpStep = ({ phoneNumber, onNext }) => {
   const [otp, setOtp] = useState('');
+  //const [customer, setCustomer] = useState({});
 
   const handleNext = () => {
     api.verifyOtp(otp, phoneNumber)
       .then( data => {
-        onNext();
+        console.log(data.data[0]);
+        //setCustomer(data.data[0]);
+        //console.log(customer);
+        onNext(data.data[0]);
       })
       .catch(error => {
         console.error('Error fetching products:', error);

@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
 import { Container, Form, Button } from 'react-bootstrap';
+import api from '../../api';
 
 const PhoneStep = ({ onNext }) => {
   const [phoneNumber, setPhoneNumber] = useState('');
 
   const handleNext = () => {
-    // Perform OTP sending logic here
-    onNext();
+    api.getOtpInSignup(phoneNumber)
+    .then( data => {
+      onNext(phoneNumber);
+    })
+    .catch(error => {
+      console.error('Error fetching products:', error);
+    });
   };
 
   return (
