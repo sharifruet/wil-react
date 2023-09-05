@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Container, Form, Button } from 'react-bootstrap';
+import { Container, Form, Button, Alert } from 'react-bootstrap';
 import api from '../../api';
 
 const OtpStep = ({ phoneNumber, onNext }) => {
   const [otp, setOtp] = useState('');
+  const [errorMessage, setErrormessage] = useState('');
   //const [customer, setCustomer] = useState({});
 
   const handleNext = () => {
@@ -16,6 +17,7 @@ const OtpStep = ({ phoneNumber, onNext }) => {
       })
       .catch(error => {
         console.error('Error fetching products:', error);
+        setErrormessage(error.response.data.message);
       });
   };
 
@@ -31,6 +33,7 @@ const OtpStep = ({ phoneNumber, onNext }) => {
             placeholder="Enter the OTP you received"
           />
         </Form.Group>
+        {errorMessage.length>0 && <Alert variant='danger'>{errorMessage}</Alert>}
         <Button onClick={handleNext}>Next</Button>
       </Form>
     </div>

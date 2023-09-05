@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Form, Button } from 'react-bootstrap';
+import {Form, Button, Alert } from 'react-bootstrap';
 import api from '../../api';
 
 const AdditionalInfoStep = ({customer, onSignUp }) => {
@@ -8,6 +8,7 @@ const AdditionalInfoStep = ({customer, onSignUp }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [errorMessage, setErrormessage] = useState('');
 
   const handleSignUp = () => {
     // Perform signup logic here
@@ -16,7 +17,7 @@ const AdditionalInfoStep = ({customer, onSignUp }) => {
     customer.password = password;
 
     if(password!=confirmPassword){
-      alert("Passwords mismatch");
+      setErrormessage("Passwords mismatch");
       return;
     }
 
@@ -28,12 +29,14 @@ const AdditionalInfoStep = ({customer, onSignUp }) => {
     })
     .catch(error => {
       console.error('Error fetching products:', error);
+      setErrormessage(error?.response?.data?.message);
     });
 
   };
 
   return (
     <div>
+      {errorMessage.length>0 && <Alert variant='danger'>{errorMessage}</Alert>}
       <Form>
         <Form.Group controlId="Password">
           <Form.Label>Password</Form.Label>

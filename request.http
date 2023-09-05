@@ -33,7 +33,7 @@ content-type: application/json
 ### 
 
 ### Signup - OTP verify [local]
-POST http://localhost:5000/api/auth//otp-verify
+PUT http://localhost:5000/api/auth//otp-verify
 content-type: application/json
 
 {
@@ -42,7 +42,17 @@ content-type: application/json
 }
 
 ### Signup - additional[local]
-POST http://localhost:5000/api/auth/signup/7445
+PUT http://localhost:5000/api/auth/signup/7445
+content-type: application/json
+
+{
+    "name":"Sharif 1",
+    "address":"Dhaka",
+    "password":"1234"
+}
+
+### Signup - additional[WIL]
+PUT https://api.wahidiya.com/api/auth/signup/9817
 content-type: application/json
 
 {
