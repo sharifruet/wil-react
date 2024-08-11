@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Button, Col, Row } from 'react-bootstrap';
 import { FaMinus, FaPlus } from 'react-icons/fa';
-import { useCart } from '../context/CartContext'; // Import the useCart hook
+import GlobalContext from '../GlobalContext'; // Import GlobalContext
 
 const CartItem = ({ item }) => {
-  const { removeFromCart, increaseQuantity, decreaseQuantity } = useCart(); // Use the useCart hook to access cart functions
+  const { removeFromCart, addToCart } = useContext(GlobalContext); // Access functions from GlobalContext
 
   return (
     <Row className="cart-item">
@@ -17,7 +17,20 @@ const CartItem = ({ item }) => {
         <h6>প্রকাশনীঃ {item.af1.publisherName}</h6>
         <p className="m-0">দর: {item.salePrice} টাকা</p>
         <p className="m-0">
-          পরিমান: <Button variant="outline-info" onClick={() => decreaseQuantity(item.componentId)}> <FaMinus /> </Button> {item.quantity} <Button variant="outline-info" onClick={() => increaseQuantity(item.componentId)}> <FaPlus /> </Button>
+          পরিমান: 
+          <Button 
+            variant="outline-info" 
+            onClick={() => removeFromCart(item.componentId)}
+          > 
+            <FaMinus /> 
+          </Button> 
+          {item.quantity} 
+          <Button 
+            variant="outline-info" 
+            onClick={() => addToCart(item)}
+          > 
+            <FaPlus /> 
+          </Button>
         </p>
         <p className="m-0">মোট দাম: {item.quantity * item.salePrice} টাকা</p>
         <Button variant="info" onClick={() => removeFromCart(item.componentId)}>Remove</Button>

@@ -1,12 +1,11 @@
-// src/components/ProductDetail.js
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
-import { useCart } from '../context/CartContext';
+import GlobalContext from '../GlobalContext'; // Import GlobalContext
 import api from '../api';
 
 const ProductDetail = () => {
   const { productId } = useParams();
-  const { addToCart } = useCart(); // Access the addToCart function from context
+  const { addToCart } = useContext(GlobalContext); // Access addToCart from GlobalContext
   const [product, setProduct] = useState(null);
 
   useEffect(() => {
@@ -24,7 +23,7 @@ const ProductDetail = () => {
       {/* ... Product details ... */}
       <button
         className="btn btn-primary"
-        onClick={() => addToCart(product)}
+        onClick={() => addToCart(product)} // Add product to cart
       >
         Add to Cart
       </button>

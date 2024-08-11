@@ -22,8 +22,8 @@ const OtpStep = ({ phoneNumber, onNext }) => {
   };
 
   return (
-    <div>
-      <Form>
+    <div className="my-4">
+      <Form className="my-4">
         <Form.Group controlId="otp">
           <Form.Label>Enter OTP</Form.Label>
           <Form.Control
@@ -34,6 +34,7 @@ const OtpStep = ({ phoneNumber, onNext }) => {
           />
         </Form.Group>
         {errorMessage.length>0 && <Alert variant='danger'>{errorMessage}</Alert>}
+        <br/>
         <Button onClick={handleNext}>Next</Button>
       </Form>
     </div>

@@ -1,54 +1,51 @@
-// src/components/Header.js
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { useCart } from '../context/CartContext';
-import { Navbar, Nav, Container, Row, Col, Badge } from "react-bootstrap";
+import { Navbar, Nav, Container, Row, Col, Badge, Stack } from "react-bootstrap";
 import { BsCartFill } from "react-icons/bs";
+import GlobalContext from '../GlobalContext'; // Import GlobalContext
 
 const Header = () => {
-  const { cartItems } = useCart();
+  const { cart } = useContext(GlobalContext); // Access cart from GlobalContext
+
+  
 
   return (
-    <header className="text-white py-3">
+    <header className="text-white pt-2">
       <Container>
         <Row>
-          <Col >
+          <Col md={3}>
             <img src="/images/wil-logo.png" alt="Wahidiya Bookshop" width="70" />
           </Col>
-          <Col>
-            <div>
-              <img src="/images/logo-name.png" alt="Wahidiya Islamiya Library" height={40}/>
-            </div>
-            <Navbar className="text-dark" variant="light">
-              <Nav>
-                <Nav.Item>
-                  <Link to="/" className="nav-link">লাইব্রেরী</Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Link to="/publications" className="nav-link">প্রকাশনা</Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Link to="/free-ebooks" className="nav-link">ফ্রি ই-বুক</Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Link to="/daawah" className="nav-link">দাওয়াহ</Link>
-                </Nav.Item>
-              </Nav>
-            </Navbar>
+          <Col md={6}>
+            <Row>
+              <Col>
+                <img src="/images/logo-name.png" alt="Wahidiya Islamiya Library" height={40}/>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <Navbar data-bs-theme="dark">
+                  <Container>
+                    <Nav className="me-auto">
+                      <Nav.Link className="text-primary" href="/">লাইব্রেরী</Nav.Link>
+                      <Nav.Link className="text-primary" href="/publications">প্রকাশনা</Nav.Link>
+                      <Nav.Link className="text-primary" href="/free-ebooks">ফ্রি ই-বুক</Nav.Link>
+                    </Nav>
+                  </Container>
+                </Navbar>
+              </Col>
+            </Row>
           </Col>
-          <Col>
-            <Nav>
-              <Nav.Item>
-                <Link to="/signup" className="nav-link">Sign Up</Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Link to="/signin" className="nav-link">Sign In</Link>
-              </Nav.Item>
-            </Nav>
-            <Link to="/cart" className=""> 
-              <BsCartFill/> 
-              <Badge pill bg="danger">{cartItems.length}</Badge>
-              <span className="visually-hidden">Items in Cart</span> </Link>
+          <Col md={3}>
+            <Stack direction="horizontal" gap={3}>
+              <Link to="/signup" className="nav-link text-primary">Sign Up</Link>
+              <Link to="/signin" className="nav-link text-primary">Sign In</Link>
+              <Link to="/cart" className=""> 
+                <BsCartFill/> 
+                <Badge pill bg="danger">{cart.length}</Badge> {/* Use cart.length */}
+                <span className="visually-hidden">Items in Cart</span> 
+              </Link>
+            </Stack>
           </Col>
         </Row>
       </Container>

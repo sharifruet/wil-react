@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Form, Button, Alert } from 'react-bootstrap';
+import {Form, Button, Alert, FloatingLabel } from 'react-bootstrap';
 import api from '../../api';
 
 const AdditionalInfoStep = ({customer, onSignUp }) => {
@@ -35,55 +35,31 @@ const AdditionalInfoStep = ({customer, onSignUp }) => {
   };
 
   return (
-    <div>
+    <div className="my-4">
       {errorMessage.length>0 && <Alert variant='danger'>{errorMessage}</Alert>}
-      <Form>
-        <Form.Group controlId="Password">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="text"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Enter your password"
-          />
-        </Form.Group>
-        <Form.Group controlId="Password">
-          <Form.Label>Confirm Password</Form.Label>
-          <Form.Control
-            type="text"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            placeholder="Re-enter your password"
-          />
-        </Form.Group>
+      <Form className="my-4">
+        
+        <FloatingLabel controlId="floatingPassword" label="Password">
+          <Form.Control type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+        </FloatingLabel>
 
-        <Form.Group controlId="name">
-          <Form.Label>Name</Form.Label>
-          <Form.Control
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Enter your name"
-          />
-        </Form.Group>
-        <Form.Group controlId="address">
-          <Form.Label>Address</Form.Label>
-          <Form.Control
-            type="text"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-            placeholder="Enter your address"
-          />
-        </Form.Group>
-        <Form.Group controlId="email">
-          <Form.Label>Email</Form.Label>
-          <Form.Control
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter your email"
-          />
-        </Form.Group>
+        <FloatingLabel controlId="floatingConfirmPassword" label="Confirm Password">
+          <Form.Control type="password" placeholder="Re-enter Password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}/>
+        </FloatingLabel>
+
+        <FloatingLabel controlId="floatingInput" label="Name" className="mb-3">
+          <Form.Control type="name" value={name} placeholder="Name" onChange={(e) => setName(e.target.value)}/>
+        </FloatingLabel>
+
+        <FloatingLabel controlId="floatingInput" label="Address" className="mb-3">
+          <Form.Control type="address" value={address} placeholder="Address" onChange={(e) => setAddress(e.target.value)}/>
+        </FloatingLabel>
+
+        <FloatingLabel controlId="floatingInput" label="Email address" className="mb-3">
+          <Form.Control type="email" value={email} placeholder="name@example.com" onChange={(e) => setEmail(e.target.value)}/>
+        </FloatingLabel>
+
+        <br/>
         <Button variant='info' onClick={handleSignUp}>Sign Up</Button>
       </Form>
     </div>

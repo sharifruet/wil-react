@@ -12,15 +12,15 @@ import Ebook from './components/Ebook';
 import Daawah from './components/Daawah';
 import Signup from './components/Signup';
 import Signin from './components/Signin';
+import { GlobalProvider } from './GlobalContext';
 
 function App() {
   return (
     <Router>
-      <CartProvider>
+      <GlobalProvider>
         <Header />
         <main>
           <Routes>
-        
             <Route path="/" element={<HomePage />} />
             <Route path="/products" element={ProductList} />
             <Route path="/products/:productId" element={<ProductDetail/>} />
@@ -34,7 +34,7 @@ function App() {
           </Routes>
         </main>
         <Footer />
-      </CartProvider>
+      </GlobalProvider>
     </Router>
   );
 }

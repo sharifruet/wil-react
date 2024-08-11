@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Form, Button, Alert } from 'react-bootstrap';
+import { Container, Form, Button, Alert, FloatingLabel } from 'react-bootstrap';
 import api from '../../api';
 
 const PhoneStep = ({ onNext }) => {
@@ -19,18 +19,13 @@ const PhoneStep = ({ onNext }) => {
   };
 
   return (
-    <div>
-      <Form>
-        <Form.Group controlId="phoneNumber">
-          <Form.Label>Enter Phone Number</Form.Label>
-          <Form.Control
-            type="text"
-            value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
-            placeholder="Enter your phone number"
-          />
-        </Form.Group>
+    <div className="my-4">
+      <Form  className="my-4">
+        <FloatingLabel controlId="floatingInput" label="Phone number" className="mb-3">
+          <Form.Control type="text" value={phoneNumber} placeholder="Enter your phone number" onChange={(e) => setPhoneNumber(e.target.value)}/>
+        </FloatingLabel>
         {errorMessage.length>0 && <Alert variant='danger'>{errorMessage}</Alert>}
+        <br/> 
         <Button variant='info' onClick={handleNext}>Next</Button>
       </Form>
     </div>

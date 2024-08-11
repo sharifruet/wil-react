@@ -1,6 +1,6 @@
 // src/components/Signup.js
 import React, { useState } from 'react';
-import { Container } from 'react-bootstrap';
+import { Row, Col, Container } from 'react-bootstrap';
 import PhoneStep from './signup/PhoneStep';
 import OtpStep from './signup/OtpStep';
 import AdditionalInfoStep from './signup/AdditionalInfoStep';
@@ -28,10 +28,15 @@ const Signup = () => {
 
   return (
     <Container>
-        <h1 className="m-2 border-bottom border-info"> Sign Up </h1>
-        {step === 1 && <PhoneStep onNext={handlePhoneStepComplete} />}
-        {step === 2 && <OtpStep phoneNumber={phoneNumber} onNext={handleOtpStepComplete} />}
-        {step === 3 && <AdditionalInfoStep customer={customer} onSignUp={handleSignUp} />}
+      <Row my={2} className="justify-content-md-center">
+        <Col md={4}>
+          <h3>Sign Up ({step} / 3)</h3>
+          <hr/>
+          {step === 1 && <PhoneStep onNext={handlePhoneStepComplete} />}
+          {step === 2 && <OtpStep phoneNumber={phoneNumber} onNext={handleOtpStepComplete} />}
+          {step === 3 && <AdditionalInfoStep customer={customer} onSignUp={handleSignUp} />}
+        </Col>
+      </Row>
     </Container>
   );
 };
