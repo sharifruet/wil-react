@@ -1,16 +1,20 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Container, Form, Button, Alert } from 'react-bootstrap';
 import api from '../../api';
+import GlobalContext from '../../GlobalContext';
 
 const OtpStep = ({ phoneNumber, onNext }) => {
   const [otp, setOtp] = useState('');
   const [errorMessage, setErrormessage] = useState('');
+  const { handleLogin } = useContext(GlobalContext); // Access cart from GlobalContext
   //const [customer, setCustomer] = useState({});
 
   const handleNext = () => {
     api.verifyOtp(otp, phoneNumber)
       .then( data => {
-        console.log(data.data[0]);
+        console.log(data);
+        //console.log(data.data[0]);
+        handleLogin(data);
         //setCustomer(data.data[0]);
         //console.log(customer);
         onNext(data.data[0]);

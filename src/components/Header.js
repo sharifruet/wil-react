@@ -5,9 +5,7 @@ import { BsCartFill } from "react-icons/bs";
 import GlobalContext from '../GlobalContext'; // Import GlobalContext
 
 const Header = () => {
-  const { cart } = useContext(GlobalContext); // Access cart from GlobalContext
-
-  
+  const { cart, loggedIn, user, handleLogout } = useContext(GlobalContext); // Access cart from GlobalContext
 
   return (
     <header className="text-white pt-2">
@@ -38,8 +36,13 @@ const Header = () => {
           </Col>
           <Col md={3}>
             <Stack direction="horizontal" gap={3}>
-              <Link to="/signup" className="nav-link text-primary">Sign Up</Link>
-              <Link to="/signin" className="nav-link text-primary">Sign In</Link>
+              {loggedIn?
+                <>{user.name} | <span onClick={handleLogout}>Logout</span> </>
+                :<>
+                  <Link to="/signup" className="nav-link text-primary">Sign Up</Link>
+                  <Link to="/signin" className="nav-link text-primary">Sign In</Link>
+                </>
+              }
               <Link to="/cart" className=""> 
                 <BsCartFill/> 
                 <Badge pill bg="danger">{cart.length}</Badge> {/* Use cart.length */}

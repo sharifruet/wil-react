@@ -10,6 +10,7 @@ const GlobalProvider = ({ children }) => {
     const [users, setUsers] = useState(null);
     const [loggedIn, setLoggedIn] = useState(false);
     const [accessToken, setAccessToken] = useState(null);
+    const [refreshToken, setRefreshToken] = useState(null);
     const [items, setItems] = useState([]);
     const [cart, setCart] = useState([]); // Cart state added
     const navigate = useNavigate();
@@ -28,6 +29,22 @@ const GlobalProvider = ({ children }) => {
     const headerConfig = () => {
         return { headers: { Authorization: `Bearer ${accessToken}`, "Content-Type": "application/json" } };
     };
+
+    const handleLogin = (obj)=>{
+        if(obj){
+            setAccessToken(obj.accessToken);
+            setAccessToken(obj.refreshToken);
+            setLoggedIn(true);
+            setUser(obj.data[0]);
+        }
+    }
+
+    const handleLogout = ()=>{
+        setAccessToken(null);
+        setAccessToken(null);
+        setLoggedIn(false);
+        setUser(null);
+    }
 
     // Function to add item to cart
     const addToCart = (item) => {
@@ -78,7 +95,9 @@ const GlobalProvider = ({ children }) => {
             cart,
             addToCart,
             removeFromCart,
-            clearCart
+            clearCart,
+            handleLogin,
+            handleLogout
         }}>
             {children}
         </GlobalContext.Provider>
