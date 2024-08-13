@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Navbar, Nav, Container, Row, Col, Badge, Stack } from "react-bootstrap";
 import { BsCartFill } from "react-icons/bs";
 import GlobalContext from '../GlobalContext'; // Import GlobalContext
+import LoginModal from './LoginModal';
 
 const Header = () => {
   const { cart, loggedIn, user, handleLogout } = useContext(GlobalContext); // Access cart from GlobalContext
@@ -40,7 +41,7 @@ const Header = () => {
                 <>{user.name} | <span onClick={handleLogout}>Logout</span> </>
                 :<>
                   <Link to="/signup" className="nav-link text-primary">Sign Up</Link>
-                  <Link to="/signin" className="nav-link text-primary">Sign In</Link>
+                  <LoginModal/>
                 </>
               }
               <Link to="/cart" className=""> 
@@ -52,6 +53,7 @@ const Header = () => {
           </Col>
         </Row>
       </Container>
+      
     </header>
   );
 };

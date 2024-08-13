@@ -44,6 +44,16 @@ const api = {
       throw error;
     }
   },
+  login: async (loginObj)=> {
+    try {
+      const response = await instance.post(`/auth/login`, loginObj);
+  
+      return response.data;
+    } catch (error) {
+      console.error(`Error sign in with`, error);
+      throw error;
+    }
+  },
 
   signup: async (customer)=> {
     try {
