@@ -16,12 +16,14 @@ const LoginModal = () => {
     const handleLoginSubmit = () => {
         api.login(object)
         .then( data => {
+            //console.log(data);
             handleLogin(data);
+            handleClose();
         })
         .catch(error => {
             console.error('Error fetching products:', error);
         });
-        handleClose();
+        
     }
 
     return (
@@ -35,6 +37,7 @@ const LoginModal = () => {
             <Modal.Title>Log In <BsKeyFill/></Modal.Title>
             </Modal.Header>
             <Modal.Body>
+                
                 <FloatingLabel controlId="floatingInput" label="Phone number"  className="mb-3" >
                     <Form.Control type="username" placeholder="phone number" onChange={(e) => object.username = e.target.value}/>
                 </FloatingLabel>

@@ -33,9 +33,9 @@ const GlobalProvider = ({ children }) => {
     const handleLogin = (obj)=>{
         if(obj){
             setAccessToken(obj.accessToken);
-            setAccessToken(obj.refreshToken);
+            setRefreshToken(obj.refreshToken);
             setLoggedIn(true);
-            setUser(obj.data[0]);
+            setUser(obj.user);
         }
     }
 
