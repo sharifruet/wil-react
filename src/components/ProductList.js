@@ -6,14 +6,15 @@ import GlobalContext from '../GlobalContext'; // Import GlobalContext
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
-  const { addToCart } = useContext(GlobalContext); // Access addToCart from GlobalContext
+  const { addToCart, items} = useContext(GlobalContext); // Access addToCart from GlobalContext
 
+  /*
   useEffect(() => {
     api.getProducts()
       .then(data => setProducts(data))
       .catch(error => console.error('Error fetching products:', error));
   }, []);
-
+*/
   const handleAddToCart = (product) => {
     addToCart(product); // Call addToCart with the selected product
   };
@@ -21,7 +22,7 @@ const ProductList = () => {
   return (
     <Container>
       <div className="row">
-        {products.map(product => (
+        {items.map(product => (
           <div className="col-md-2 mt-2 mb-2" key={product.componentId}>
             <div className="card">
               <img src={'/images/' + product.photo} className="card-img-top" alt={product.uniqueCode} />
