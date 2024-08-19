@@ -8,7 +8,7 @@ import { Container } from 'react-bootstrap';
 const HomePage = () => {
   return (
     <Container>
-      <HomeSlider />
+      {/*<HomeSlider />*/}
       <ProductList/>
     </Container>
   );

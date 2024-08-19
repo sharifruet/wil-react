@@ -9,7 +9,7 @@ const Header = () => {
   const { cart, loggedIn, user, handleLogout } = useContext(GlobalContext); // Access cart from GlobalContext
 
   return (
-    <header className="text-white pt-2">
+    <header className="text-info pt-2">
       <Container>
         <Row>
           <Col md={3}>
@@ -46,7 +46,7 @@ const Header = () => {
               }
               <Link to="/cart" className=""> 
                 <BsCartFill/> 
-                <Badge pill bg="danger">{cart.length}</Badge> {/* Use cart.length */}
+                <Badge pill bg="danger">{cart.length}</Badge> 
                 <span className="visually-hidden">Items in Cart</span> 
               </Link>
             </Stack>
