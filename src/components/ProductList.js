@@ -1,13 +1,19 @@
 import React, { useState, useEffect, useContext } from 'react';
 import api from '../api';
 import { Button, Card, Container, Row, Col, Stack, Form } from 'react-bootstrap';
-import { FaCartPlus } from 'react-icons/fa';
+import InputGroup from 'react-bootstrap/InputGroup';
+import { FaCartPlus, FaSearch } from 'react-icons/fa';
 import GlobalContext from '../GlobalContext'; // Import GlobalContext
 
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
-  const { addToCart, items} = useContext(GlobalContext); // Access addToCart from GlobalContext
+  const [searchText, setSearchText] = useState('');
+  const {addToCart, items} = useContext(GlobalContext); // Access addToCart from GlobalContext
+
+  const searchTextHandle = (val) => {
+    
+  }
 
   /*
   useEffect(() => {
@@ -24,7 +30,9 @@ const ProductList = () => {
     <Container>
       <Row className='my-2 p-2'>
         <Col>
-          <Form.Control type="password"  id="inputPassword5" aria-describedby="passwordHelpBlock" />
+          <InputGroup className="mb-3">
+            <Form.Control id="ProductListSearch" onKeyUp={e=>searchTextHandle(e.target.value)} aria-label="Amount (to the nearest dollar)" />
+          </InputGroup>
         </Col>
       </Row>
       <Row>
