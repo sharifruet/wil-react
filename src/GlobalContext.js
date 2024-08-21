@@ -48,11 +48,12 @@ const GlobalProvider = ({ children }) => {
 
     // Function to add item to cart
     const addToCart = (item) => {
+        //console.log(item);
         setCart((prevCart) => {
-            const itemExists = prevCart.find(cartItem => cartItem.id === item.id);
+            const itemExists = prevCart.find(cartItem => cartItem.componentId === item.componentId);
             if (itemExists) {
                 return prevCart.map(cartItem =>
-                    cartItem.id === item.id
+                    cartItem.componentId === item.componentId
                         ? { ...cartItem, quantity: cartItem.quantity + 1 }
                         : cartItem
                 );
@@ -68,7 +69,7 @@ const GlobalProvider = ({ children }) => {
         setCart((prevCart) => {
             const updatedCart = prevCart
                 .map(cartItem =>
-                    cartItem.id === itemId && cartItem.quantity > 1
+                    cartItem.componentId === itemId && cartItem.quantity > 1
                         ? { ...cartItem, quantity: cartItem.quantity - 1 }
                         : cartItem
                 )

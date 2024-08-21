@@ -10,10 +10,15 @@ const ProductList = () => {
   const [products, setProducts] = useState([]);
   const [searchText, setSearchText] = useState('');
   const {addToCart, items} = useContext(GlobalContext); // Access addToCart from GlobalContext
+  const [filteredItems, setFilteredItems] = useState([]);
 
   const searchTextHandle = (val) => {
-    
+    setFilteredItems(items.filter(itm=>itm.itemName.includes(val) || itm?.af1?.authorName?.includes(val)));
   }
+
+  useEffect(() => {
+    setFilteredItems(items);
+  },[items]);
 
   /*
   useEffect(() => {
@@ -23,6 +28,7 @@ const ProductList = () => {
   }, []);
 */
   const handleAddToCart = (product) => {
+    
     addToCart(product); // Call addToCart with the selected product
   };
 
@@ -30,19 +36,20 @@ const ProductList = () => {
     <Container>
       <Row className='my-2 p-2'>
         <Col>
-          <InputGroup className="mb-3">
-            <Form.Control id="ProductListSearch" onKeyUp={e=>searchTextHandle(e.target.value)} aria-label="Amount (to the nearest dollar)" />
+          <InputGroup size="lg" className="mb-3">
+            <InputGroup.Text id="basic-addon1"> <FaSearch/> </InputGroup.Text>
+            <Form.Control id="ProductListSearch" onKeyUp={e=>searchTextHandle(e.target.value)} aria-label="Type book title / author name" placeholder="Type book title / author name"/>
           </InputGroup>
         </Col>
       </Row>
       <Row>
-      {items.map(product => (
+      {filteredItems.map(product => (
         <Col md={3} key={product.componentId} className='mt-2'>
           <Card>
             <Card.Img variant="top" src={'/images/' + product.photo} />
             <Card.Body>
               <Card.Title>{product.itemName}</Card.Title>
-              <Card.Subtitle className="mb-2 text-muted">{product.itemName}</Card.Subtitle>
+              <Card.Subtitle className="mb-2 text-muted">{product?.af1?.authorName}</Card.Subtitle>
               <Stack direction="horizontal" gap={3}>
                 <div className="p-2 text-danger" style={{"text-decoration": "line-through"}}> ৳ {product.salePrice} </div>
                 <div className="p-2 text-info"> ৳ {product.salePrice} </div>
