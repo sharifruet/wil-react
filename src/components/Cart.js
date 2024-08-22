@@ -1,13 +1,22 @@
 import React, { useContext } from 'react';
 import CartItem from './CartItem';
-import { Button, Col, Container, Row } from 'react-bootstrap';
+import { Button, Card, Col, Container, Row, Toast } from 'react-bootstrap';
 import GlobalContext from '../GlobalContext'; // Import GlobalContext
 
 const Cart = () => {
-  const { cart, clearCart, addToCart, removeFromCart } = useContext(GlobalContext); // Access cart-related functions from GlobalContext
+  const { cart, clearCart, addToCart, removeFromCart, loggedIn, setShowLogin } = useContext(GlobalContext); // Access cart-related functions from GlobalContext
 
   const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
   const totalAmount = cart.reduce((total, item) => total + item.quantity * item.salePrice, 0);
+
+  const proceedToOrder = () =>{
+    if(!loggedIn){
+      setShowLogin(true);
+    }else{
+      
+    }
+
+  }
 
   return (
     <Container>
@@ -16,7 +25,7 @@ const Cart = () => {
         <p>Your cart is empty.</p>
       ) : (
         <Row>
-          <Col>
+          <Col md={8}>
             {cart.map(item => (
               <CartItem
                 key={item.componentId}
@@ -27,11 +36,22 @@ const Cart = () => {
             ))}
           </Col>
           <Col>
-            <p>Total Items: {totalItems}</p>
-            <p>Total Amount: {totalAmount} টাকা</p>
 
-            <Button className='m-1' variant="warning" onClick={clearCart}>Clear Cart</Button>
-            <Button className='m-1' variant="info">Proceed to Order</Button>
+            <Card md={4}>
+              <Card.Header>Cart Summery</Card.Header>
+              <Card.Body>
+                <Card.Title>Cart Summery</Card.Title>
+                <Card.Text>
+                  <p>Total Items: {totalItems}</p>
+                  <p>Total Amount: {totalAmount} টাকা</p>
+                </Card.Text>
+              </Card.Body>
+
+              <Card.Body>
+                <Button className='m-1' variant="warning" onClick={clearCart}>Clear Cart</Button>
+                <Button className='m-1' variant="info" onClick={proceedToOrder}>Proceed to Order</Button>
+              </Card.Body>
+            </Card>
           </Col>
         </Row>
       )}

@@ -13,6 +13,7 @@ const GlobalProvider = ({ children }) => {
     const [refreshToken, setRefreshToken] = useState(null);
     const [items, setItems] = useState([]);
     const [cart, setCart] = useState([]); // Cart state added
+    const [showLogin, setShowLogin] = useState(false);
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -98,7 +99,9 @@ const GlobalProvider = ({ children }) => {
             removeFromCart,
             clearCart,
             handleLogin,
-            handleLogout
+            handleLogout,
+            showLogin, 
+            setShowLogin
         }}>
             {children}
         </GlobalContext.Provider>

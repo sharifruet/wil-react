@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { Navbar, Nav, Container, Row, Col, Badge, Stack } from "react-bootstrap";
+import { Navbar, Nav, Container, Row, Col, Badge, Stack, Toast } from "react-bootstrap";
 import { BsCartFill } from "react-icons/bs";
 import GlobalContext from '../GlobalContext'; // Import GlobalContext
 import LoginModal from './LoginModal';
 
 const Header = () => {
-  const { cart, loggedIn, user, handleLogout } = useContext(GlobalContext); // Access cart from GlobalContext
+  const { cart, loggedIn, user, handleLogout, showLogin, setShowLogin } = useContext(GlobalContext); // Access cart from GlobalContext
 
   return (
     <header className="text-info pt-2">
@@ -50,6 +50,16 @@ const Header = () => {
                 <span className="visually-hidden">Items in Cart</span> 
               </Link>
             </Stack>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Toast onClose={() => setShowLogin(false)} show={showLogin} delay={3000} autohide>
+              <Toast.Header>
+                <strong className="me-auto">Notification</strong>
+              </Toast.Header>
+              <Toast.Body>Please login first</Toast.Body>
+            </Toast>
           </Col>
         </Row>
       </Container>
