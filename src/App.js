@@ -13,6 +13,7 @@ import Daawah from './components/Daawah';
 import Signup from './components/Signup';
 import Signin from './components/Signin';
 import { GlobalProvider } from './GlobalContext';
+import Order from './components/Order';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path="/products" element={ProductList} />
             <Route path="/products/:productId" element={<ProductDetail/>} />
             <Route path="/cart" element={<Cart/>} />
+            <Route path="/order" element={<Order/>} />
             <Route path="/publications" element={<Publications/>} />
             <Route path="/free-ebooks" element={<Ebook/>} />
             <Route path="/daawah" element={<Daawah/>} />
