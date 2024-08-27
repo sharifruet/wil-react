@@ -63,6 +63,16 @@ const api = {
       console.error(`Error at sign up with customer ${customer}:`, error);
       throw error;
     }
+  },
+
+  saveOrder: async (order)=> {
+    try {
+      const response = await instance.put(`/api/orders`, order);
+      return response.data;
+    } catch (error) {
+      console.error(`Error at save order:`, error);
+      throw error;
+    }
   }
   // Add more API calls as needed
 };

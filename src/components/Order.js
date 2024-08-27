@@ -4,17 +4,15 @@ import { Button, Card, Col, Container, Row, Toast } from 'react-bootstrap';
 import GlobalContext from '../GlobalContext'; // Import GlobalContext
 
 const Order = () => {
-  const { cart, clearCart, addToCart, removeFromCart, loggedIn, setShowLogin, setOrder } = useContext(GlobalContext); // Access cart-related functions from GlobalContext
+  const { order, clearCart, addToCart, removeFromCart, loggedIn, setShowLogin, setOrder } = useContext(GlobalContext); // Access cart-related functions from GlobalContext
 
-  const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
-  const totalAmount = cart.reduce((total, item) => total + item.quantity * item.salePrice, 0);
+  const totalItems = order.reduce((total, item) => total + item.quantity, 0);
+  const totalAmount = order.reduce((total, item) => total + item.quantity * item.salePrice, 0);
 
-  const placeOrder = () =>{
+
+  const saveOrder = () =>{
     if(!loggedIn){
       setShowLogin(true);
-    }else{
-      setOrder(cart);
-      
     }
 
   }
@@ -27,7 +25,7 @@ const Order = () => {
       ) : (
         <Row>
           <Col md={8}>
-            {cart.map(item => (
+            {order.map(item => (
               <OrderItem
                 key={item.componentId}
                 item={item}
