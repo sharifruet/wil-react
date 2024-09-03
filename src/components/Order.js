@@ -2,6 +2,8 @@ import React, { useContext } from 'react';
 import OrderItem from './OrderItem';
 import { Button, Card, Col, Container, Form, ListGroup, Row, Toast } from 'react-bootstrap';
 import GlobalContext from '../GlobalContext'; // Import GlobalContext
+import api from '../api';
+import { toast } from 'react-toastify';
 
 const Order = () => {
   const { order, clearCart, addToCart, removeFromCart, loggedIn, setShowLogin, setOrder } = useContext(GlobalContext); // Access cart-related functions from GlobalContext
@@ -10,11 +12,52 @@ const Order = () => {
   const totalAmount = order.reduce((total, item) => total + item.quantity * item.salePrice, 0);
 
 
+  const prepareOrder = ()=>{
+
+    let orderToSave = {
+      "order": {
+        "description": "Test Order",
+        "tdate": "2024-08-26T11:00:00Z",
+        "type": "Online",
+        "orderStatus": "Pending",
+        "userId": 2,
+        "status": 1,
+        "createdby": 1,
+        "companyId": 1
+      },
+      "orderDetails": [
+        {
+          "itemId": 103,
+          "orderQuantity": 5,
+          "unitPrice": 75.00,
+          "deliveredQuantity": 0,
+          "newReceiveQuantity": 5
+        }
+      ]
+    };
+
+
+    return orderToSave;
+
+  }
+
   const saveOrder = () =>{
     if(!loggedIn){
       setShowLogin(true);
+
+      return;
     }
 
+    const orderObject = prepareOrder();
+
+    api.saveOrder(orderObject)
+      .then(data => {
+        toast.success("Order saved");
+      })
+      .catch(error => {
+        console.error('Error in save order:', error);
+            toast.error("Error save order");
+      });
   }
 
   return (

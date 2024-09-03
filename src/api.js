@@ -67,7 +67,7 @@ const api = {
 
   saveOrder: async (order)=> {
     try {
-      const response = await instance.put(`/api/orders`, order);
+      const response = await instance.post(`/orders`, order);
       return response.data;
     } catch (error) {
       console.error(`Error at save order:`, error);
