@@ -18,19 +18,19 @@ const Header = () => {
           <Col md={6}>
             <Row>
               <Col>
-                <img src="/images/logo-name.png" alt="Wahidiya Islamiya Library" height={40}/>
+                <img src="/images/logo-name.png" alt="Wahidiya Islamiya Library" height={30}/><br/>
+                <span className="text-white">নির্ভরযোগ্য তথ্য সমৃদ্ধ কিতাব প্রকাশে সচেষ্ট</span>
               </Col>
             </Row>
             <Row>
               <Col>
-                <Navbar data-bs-theme="dark">
-                  <Container>
+                <Navbar data-bs-theme="dark" className='m-0 b-0'>
                     <Nav className="me-auto">
                       <Nav.Link className="text-primary" href="/">লাইব্রেরী</Nav.Link>
                       <Nav.Link className="text-primary" href="/publications">প্রকাশনা</Nav.Link>
                       <Nav.Link className="text-primary" href="/free-ebooks">ফ্রি ই-বুক</Nav.Link>
                     </Nav>
-                  </Container>
+                 
                 </Navbar>
               </Col>
             </Row>

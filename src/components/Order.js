@@ -69,19 +69,26 @@ const Order = () => {
         <Row>
           
           <Col md={8}>
-            <h3>Payment Options</h3>
+            <h3>Shipping Address</h3><hr/>
+            
+            <br/><br/>
+            <h3>Payment Options</h3><hr/>
             <ListGroup>
               <ListGroup.Item>
-                <Form.Check label="bKash" name="paymentOption" type="radio" id="paymentBkash" />
-                <p>Please make payment to merchant account 01XXXXXXXXX</p>
+                <Form.Check label="bKash (make payment)" name="paymentOption" type="radio" id="paymentBkash" />
+                <p>Please <b>make payment</b> to bKash merchant account number <b>01922589645</b></p>
+              </ListGroup.Item>
+              <ListGroup.Item>
+                <Form.Check label="bKash (send money)" name="paymentOption" type="radio" id="paymentBkash" />
+                <p>Please <b>send money</b> to bKash personal account number <b>01708524525</b></p>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Form.Check label="Nagad"  name="paymentOption" type="radio" id="paymentCod" />
-                <p>Please make payment to merchant account 01XXXXXXXXX</p>
+                <p>Please <b>send money</b> to Nagad personal account number 01708524525</p>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Form.Check label="Cash-on-Delivery (COD)" name="paymentOption" type="radio" id="paymentCod" />
-                <p>Please make payment to merchant account 01XXXXXXXXX</p>
+                <p>Pay to delivery man / courier agent at the time of product receive</p>
               </ListGroup.Item>
             </ListGroup>
           </Col>
