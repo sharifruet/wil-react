@@ -17,7 +17,7 @@ const OtpStep = ({ phoneNumber, onNext }) => {
         handleLogin(data);
         //setCustomer(data.data[0]);
         //console.log(customer);
-        onNext(data.data[0]);
+        onNext(data.user);
       })
       .catch(error => {
         console.error('Error fetching products:', error);

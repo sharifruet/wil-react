@@ -33,6 +33,7 @@ const GlobalProvider = ({ children }) => {
     };
 
     const handleLogin = (obj)=>{
+        console.log("Handle login ", obj);
         if(obj){
             setAccessToken(obj.accessToken);
             setRefreshToken(obj.refreshToken);
