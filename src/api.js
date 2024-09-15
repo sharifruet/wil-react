@@ -65,12 +65,21 @@ const api = {
     }
   },
 
-  saveOrder: async (order)=> {
+  saveOrder: async (order, token) => { // Accept token as parameter
     try {
-      const response = await instance.post(`/orders`, order);
+      const response = await instance.post(
+        `/orders`,
+        order,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        }
+      );
       return response.data;
     } catch (error) {
-      console.error(`Error at save order:`, error);
+      console.error('Error saving order:', error);
       throw error;
     }
   }

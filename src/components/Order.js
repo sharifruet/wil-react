@@ -1,23 +1,25 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import OrderItem from './OrderItem';
 import { Button, Card, Col, Container, Form, ListGroup, Row, Toast } from 'react-bootstrap';
 import GlobalContext from '../GlobalContext'; // Import GlobalContext
 import api from '../api';
-import { toast } from 'react-toastify';
 
 const Order = () => {
-  const { order, clearCart, addToCart, removeFromCart, loggedIn, setShowLogin, setOrder } = useContext(GlobalContext); // Access cart-related functions from GlobalContext
+  const [success, setSuccess] = useState(false);
+  const [failed, setFailed] = useState(false);
+  const { order, clearCart, addToCart, removeFromCart, loggedIn, setShowLogin, setOrder, accessToken, user } = useContext(GlobalContext); // Access cart-related functions from GlobalContext
 
   const totalItems = order.reduce((total, item) => total + item.quantity, 0);
   const totalAmount = order.reduce((total, item) => total + item.quantity * item.salePrice, 0);
 
 
   const prepareOrder = ()=>{
+    const currentDate = new Date().toISOString();
 
     let orderToSave = {
       "order": {
-        "description": "Test Order",
-        "tdate": "2024-08-26T11:00:00Z",
+        "description": "eComm Order",
+        "tdate": currentDate,
         "type": "Online",
         "orderStatus": "Pending",
         "userId": 2,
@@ -36,7 +38,6 @@ const Order = () => {
       ]
     };
 
-
     return orderToSave;
 
   }
@@ -49,19 +50,44 @@ const Order = () => {
     }
 
     const orderObject = prepareOrder();
+    orderObject.order.userId = user.componentId;
 
-    api.saveOrder(orderObject)
+    orderObject.orderDetails = order.map(item => {return {itemId: item.componentId, orderQuantity: item.quantity}});
+
+    console.log(orderObject);
+
+    
+    api.saveOrder(orderObject, accessToken)
       .then(data => {
-        toast.success("Order saved");
+        setSuccess(true);
       })
       .catch(error => {
         console.error('Error in save order:', error);
-            toast.error("Error save order");
+        setFailed(true);
       });
+      //Toast.success("Order saved");
+      
   }
 
   return (
     <Container>
+      <Row>
+        <Col>
+          <Toast bg="success" show={success} onClose={e=>{setSuccess(false)}}>
+            <Toast.Header>
+              <strong className="me-auto">Save Order</strong>
+            </Toast.Header>
+            <Toast.Body className='success'>Order place successful!!</Toast.Body>
+          </Toast>
+          <Toast bg="danger" show={failed} onClose={e=>{setFailed(false)}}>
+            <Toast.Header>
+              <strong className="me-auto">Save Order</strong>
+            </Toast.Header>
+            <Toast.Body className='danger'>Order place failed</Toast.Body>
+          </Toast>
+        </Col>
+      </Row>
+
       <h1 className="m-2 border-bottom border-info"> Order </h1>
       {order.length === 0 ? (
         <p>Your cart is empty.</p>

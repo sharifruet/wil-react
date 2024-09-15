@@ -38,7 +38,7 @@ const ProductList = () => {
         <Col>
           <InputGroup size="lg" className="mb-3">
             <InputGroup.Text id="basic-addon1"> <FaSearch/> </InputGroup.Text>
-            <Form.Control id="ProductListSearch" onKeyUp={e=>searchTextHandle(e.target.value)} aria-label="Type book title / author name" placeholder="Type book title / author name"/>
+            <Form.Control id="ProductListSearch" onKeyUp={e=>searchTextHandle(e.target.value)} aria-label="বইয়ের নাম বা লেখকের নাম " placeholder="বইয়ের নাম বা লেখকের নাম "/>
           </InputGroup>
         </Col>
       </Row>
